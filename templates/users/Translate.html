@@ -1,0 +1,49 @@
+{% extends 'users/Userbase.html' %}
+
+{% block content %}
+<h2 style="margin-top: 20px;">📝 Multilingual Question Paper Translator</h2>
+
+<form method="post" enctype="multipart/form-data" style="margin-top: 20px;">
+    {% csrf_token %}
+
+    <label><strong>Upload Question Paper (.docx):</strong></label><br>
+    <input type="file" name="question_file" accept=".docx" required><br><br>
+
+    <label><strong>Select Languages for Translation:</strong></label><br>
+    {% for lang in language_options %}
+        <input type="checkbox" name="languages" value="{{ lang }}"> {{ lang }}<br>
+    {% endfor %}
+    <br>
+
+    <label><strong>Custom Filename Prefix (optional):</strong></label><br>
+    <input type="text" name="filename_prefix" placeholder="e.g., Midterm2025"><br><br>
+
+    <button type="submit" style="padding: 8px 20px;">Start Translation</button>
+</form>
+
+<!-- ✅ Messages -->
+{% if messages %}
+    <div style="margin-top: 30px;">
+        {% for message in messages %}
+            <p style="color: green;">✅ {{ message }}</p>
+        {% endfor %}
+    </div>
+{% endif %}
+
+<!-- ✅ Download Section -->
+{% if translated_files %}
+    <div style="margin-top: 30px;">
+        <h3>📂 Translated Files:</h3>
+        <ul>
+            {% for file in translated_files %}
+                <li>
+                    <a href="{{ file }}" download style="color: blue; text-decoration: none;">
+                        ⬇️ Download {{ file|cut:"/media/" }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+
+{% endblock %}  

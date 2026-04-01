@@ -1,0 +1,19 @@
+<h2>📜 Translation History</h2>
+
+<table border="1" cellpadding="10">
+    <tr>
+        <th>File</th>
+        <th>Language</th>
+        <th>Date</th>
+        <th>Download</th>
+    </tr>
+
+    {% for item in history %}
+    <tr>
+        <td>{{ item.file_name }}</td>
+        <td>{{ item.language }}</td>
+        <td>{{ item.created_at }}</td>
+        <td><a href="{{ item.file_path }}">Download</a></td>
+    </tr>
+    {% endfor %}
+</table>

@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .registration-wrapper {
+        max-width: 600px;
+        margin: 2rem auto;
+        background-color: #ffffff;
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        border: 1px solid #0288d133;
+    }
+
+    .registration-form h1 {
+        text-align: center;
+        color: #0288d1;
+        margin-bottom: 1.5rem;
+        font-size: 1.8rem;
+        font-weight: 700;
+        font-family: 'Noto Sans', sans-serif;
+    }
+
+    .registration-form label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+        color: #1a1a1a;
+        font-family: 'Noto Sans', sans-serif;
+    }
+
+    .registration-form input,
+    .registration-form select,
+    .registration-form textarea {
+        width: 100%;
+        padding: 0.7rem;
+        margin-bottom: 1.2rem;
+        border: 1px solid #13880866;
+        border-radius: 8px;
+        box-sizing: border-box;
+        font-family: 'Noto Sans', sans-serif;
+        font-size: 1rem;
+        transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .registration-form input:focus,
+    .registration-form select:focus,
+    .registration-form textarea:focus {
+        outline: none;
+        border-color: #ff6f00;
+        box-shadow: 0 0 5px rgba(255, 111, 0, 0.3);
+    }
+
+    .registration-form button {
+        width: 100%;
+        padding: 0.8rem;
+        background: linear-gradient(135deg, #ff6f00, #138808);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        font-family: 'Noto Sans', sans-serif;
+        transition: background 0.3s;
+    }
+
+    .registration-form button:hover {
+        background: linear-gradient(135deg, #e65c00, #0a6b00);
+    }
+
+    .text-danger {
+        color: #d32f2f;
+        text-align: center;
+        margin-top: 1rem;
+        font-family: 'Noto Sans', sans-serif;
+        font-size: 0.95rem;
+    }
+
+    @media (max-width: 480px) {
+        .registration-wrapper {
+            margin: 1.5rem;
+            padding: 1.5rem;
+        }
+        .registration-form h1 {
+            font-size: 1.5rem;
+        }
+        .registration-form input,
+        .registration-form select,
+        .registration-form textarea {
+            padding: 0.6rem;
+            font-size: 0.9rem;
+        }
+        .registration-form button {
+            padding: 0.7rem;
+            font-size: 0.9rem;
+        }
+    }
+</style>
+
+<div class="registration-wrapper">
+  <form action="{% url 'register' %}" method="POST" class="registration-form">
+    <h1>User Registration</h1>
+    {% csrf_token %}
+
+    <label for="name">User Name</label>
+    {{ form.name }}
+
+    <label for="loginid">Login ID</label>
+    {{ form.loginid }}
+
+    <label for="password">Password</label>
+    {{ form.password }}
+
+    <label for="mobile">Mobile</label>
+    {{ form.mobile }}
+
+    <label for="email">Email</label>
+    {{ form.email }}
+
+    <label for="locality">Locality</label>
+    {{ form.locality }}
+
+    <label for="address">Address</label>
+    {{ form.address }}
+
+    <label for="city">City</label>
+    {{ form.city }}
+
+    <label for="state">State</label>
+    {{ form.state }}
+
+    {{ form.status }}
+
+    <button type="submit">Register</button>
+
+    {% if messages %}
+    <div class="text-danger">
+      {% for message in messages %}
+        {{ message }}<br>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </form>
+</div>
+{% endblock %}

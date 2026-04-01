@@ -1,0 +1,25 @@
+<h2>👤 User Requests</h2>
+
+<table border="1" cellpadding="10">
+    <tr>
+        <th>Name</th>
+        <th>Login</th>
+        <th>Status</th>
+        <th>Action</th>
+    </tr>
+
+    {% for user in users %}
+    <tr>
+        <td>{{ user.name }}</td>
+        <td>{{ user.loginid }}</td>
+        <td>{{ user.status }}</td>
+        <td>
+            {% if user.status == "pending" %}
+                <a href="{% url 'activate_user' user.id %}">✅ Approve</a>
+            {% else %}
+                ✔ Approved
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
